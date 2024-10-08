@@ -1,0 +1,19 @@
+{
+	"name": "arb-moruviral",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy index.js",
+		"dev": "wrangler dev index.js",
+		"push": "wrangler deploy; wrangler tail;",
+		"tail": "wrangler tail"
+	},
+	"dependencies": {
+		"axios": "^1.7.7",
+		"itty-router": "^2.6.1",
+		"moment-timezone": "^0.5.45"
+	},
+	"devDependencies": {
+		"wrangler": "^3.0.0"
+	}
+}
