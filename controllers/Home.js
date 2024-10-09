@@ -14,7 +14,7 @@ function topPostsRender(mainPost, otherPosts) {
 	return Template.renderTemplate('home_top_posts', { ...mainPost, items: items });
 }
 
-function mainCategoriesRender(posts) {
+function mainCategoriesRender(posts, renderWithColTwelve = false) {
 	let mainPost = posts[0];
 	let items = '';
 
@@ -22,7 +22,14 @@ function mainCategoriesRender(posts) {
 		items += Template.renderTemplate('home_category_item', posts[i]);
 	}
 
-	return Template.renderTemplate('home_category', { ...mainPost, items: items });
+	if (renderWithColTwelve) {
+		return Template.renderTemplate('home_category', { ...mainPost, items: items }).replace(
+			'<div class="col-md-6">',
+			'<div class="col-md-12">'
+		);
+	} else {
+		return Template.renderTemplate('home_category', { ...mainPost, items: items });
+	}
 }
 
 function popularCategories(categories) {
@@ -99,9 +106,21 @@ class Home {
 
 		let categories = '';
 
+		let mainCategories = [];
+
 		for (let category of homeData.categories) {
 			if (category.last_posts[0]) {
-				categories += mainCategoriesRender(category.last_posts);
+				mainCategories.push(category);
+			}
+		}
+
+		let oddCategoriesNumber = isOdd(mainCategories.length);
+
+		for (let i = 0; i < mainCategories.length; i++) {
+			if (oddCategoriesNumber && i == mainCategories.length - 1) {
+				categories += mainCategoriesRender(mainCategories[i].last_posts, true);
+			} else {
+				categories += mainCategoriesRender(mainCategories[i].last_posts);
 			}
 		}
 
@@ -142,6 +161,10 @@ class Home {
 
 		return response;
 	}
+}
+
+function isOdd(number) {
+	return number % 2 !== 0;
 }
 
 export default new Home();
