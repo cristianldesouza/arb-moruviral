@@ -131,7 +131,9 @@ class Template {
 						? `/${lang}/c/${post.category_slug}/`
 						: `/c/${post.category_slug}/`,
 				'{category.title}': post.category_name,
-				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format('DD/MM/YYYY'),
+				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format(
+					constants.DATE_FORMATS[lang]
+				),
 				'{post.readtime}': Util.getReadTime(JSON.parse(post.content)),
 				'{langconfig.readtime}': constants.READ_TIME[lang],
 			};
@@ -165,7 +167,9 @@ class Template {
 						? `/${lang}/c/${post.category_slug}/`
 						: `/c/${post.category_slug}/`,
 				'{category.title}': post.category_name,
-				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format('DD/MM/YYYY'),
+				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format(
+					constants.DATE_FORMATS[lang]
+				),
 				'{post.readtime}': Util.getReadTime(JSON.parse(post.content)),
 				'{langconfig.readtime}': constants.READ_TIME[lang],
 			};
@@ -201,7 +205,9 @@ class Template {
 						? `/${lang}/c/${post.category_slug}/`
 						: `/c/${post.category_slug}/`,
 				'{category.title}': post.category_name,
-				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format('DD/MM/YYYY'),
+				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format(
+					constants.DATE_FORMATS[lang]
+				),
 				'{post.readtime}': Util.getReadTime(JSON.parse(post.content)),
 				'{langconfig.readtime}': constants.READ_TIME[lang],
 			};
@@ -256,7 +262,9 @@ class Template {
 						? `/${lang}/c/${post.category_slug}/`
 						: `/c/${post.category_slug}/`,
 				'{category.title}': post.category_name,
-				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format('DD/MM/YYYY'),
+				'{post.date}': moment(post.published_date, 'YYYY-MM-DD HH:mm').format(
+					constants.DATE_FORMATS[lang]
+				),
 				'{post.readtime}': Util.getReadTime(JSON.parse(post.content)),
 				'{langconfig.readtime}': constants.READ_TIME[lang],
 			};

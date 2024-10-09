@@ -1,3 +1,4 @@
+import moment from 'moment-timezone';
 import Template from '../models/Template';
 import Requests from '../models/Requests';
 import constants from '../constants';
@@ -8,8 +9,6 @@ import criticalCss from '../critical_post_css.txt';
 
 class Post {
 	async handleLang(lang, slug, request, env, ctx) {
-		console.log(request);
-
 		let postData = await Requests.getPostData(slug, lang, constants.DOMAIN);
 
 		if (!postData) {
@@ -57,6 +56,10 @@ ${criticalCss}`);
 			constants.LANGUAGES[0] == lang
 				? `/a/${post.author_slug}/`
 				: `/${lang}/a/${post.author_slug}/`;
+
+		post.published_date = moment(post.published_date, 'YYYY-MM-DD HH:mm').format(
+			constants.DATE_FORMATS[lang]
+		);
 
 		let content = Template.renderTemplate('post_index', post);
 
