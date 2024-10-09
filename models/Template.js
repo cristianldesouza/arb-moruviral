@@ -295,9 +295,11 @@ class Template {
 
 		// Previous page link
 		if (current_page > 1) {
+			const prevPage = current_page - 1;
+			const prevUrl = prevPage === 1 ? baseUrl : `${baseUrl}${prevPage}/`;
 			paginationHTML += `
 			<div class="page page--jump">
-				<a href="${baseUrl}?page=${current_page - 1}">← ${previousText}</a>
+				<a href="${prevUrl}">← ${previousText}</a>
 			</div>`;
 		}
 
@@ -314,22 +316,33 @@ class Template {
 
 		// Page number links
 		for (let i = startPage; i <= endPage; i++) {
-			if (i === current_page) {
+			const isCurrent = i === current_page;
+			let pageUrl = '';
+
+			if (i === 1) {
+				pageUrl = baseUrl;
+			} else {
+				pageUrl = `${baseUrl}${i}/`;
+			}
+
+			if (isCurrent) {
 				paginationHTML += `
 				<div class="page page--current"><span>${i}</span></div>`;
 			} else {
 				paginationHTML += `
 				<div class="page">
-					<a href="${baseUrl}?page=${i}">${i}</a>
+					<a href="${pageUrl}">${i}</a>
 				</div>`;
 			}
 		}
 
 		// Next page link
 		if (current_page < total_pages) {
+			const nextPage = current_page + 1;
+			const nextUrl = `${baseUrl}${nextPage}/`;
 			paginationHTML += `
 			<div class="page page--jump">
-				<a href="${baseUrl}?page=${current_page + 1}">${nextText} →</a>
+				<a href="${nextUrl}">${nextText} →</a>
 			</div>`;
 		}
 

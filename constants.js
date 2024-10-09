@@ -1,5 +1,5 @@
 module.exports = Object.freeze({
-	CACHING: false,
+	CACHING: true,
 	PUBLIC_KEY:
 		'BBSIN_16XjPEEKOkcGwLHgnBFPjZgxBjFQHZ_BXn206dP3nzLpU7WryrIgmQ629AIg0rQo9I8Cl51QijEoOnsYk',
 	LANGUAGES: ['pt', 'es', 'en', 'de', 'fr'],

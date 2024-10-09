@@ -35,8 +35,15 @@ router.post('/api/contact/message/', Contact.receiveMessage);
 // Categorias - /c/:slug/*
 router.get('/c/:slug/*', (request, env, ctx) => {
 	const { slug } = request.params;
-	const page = request.query.page || 1;
-	return Category.handleLang(defaultLang, slug, page, request, env, ctx);
+
+	const url = new URL(request.url);
+	const pathname = url.pathname;
+	const segments = pathname.split('/').filter((segment) => segment.length > 0);
+	const lastSegment = segments[segments.length - 1];
+	const pageNum = parseInt(lastSegment, 10);
+	const validPage = Number.isInteger(pageNum) && pageNum > 0 ? pageNum : 1;
+
+	return Category.handleLang(defaultLang, slug, validPage, request, env, ctx);
 });
 
 // Posts - /p/:slug/*
@@ -54,8 +61,15 @@ router.get('/l/:slug/*', (request, env, ctx) => {
 // Autores - /a/:slug/*
 router.get('/a/:slug/*', (request, env, ctx) => {
 	const { slug } = request.params;
-	const page = request.query.page || 1;
-	return Author.handleLang(defaultLang, slug, page, request, env, ctx);
+
+	const url = new URL(request.url);
+	const pathname = url.pathname;
+	const segments = pathname.split('/').filter((segment) => segment.length > 0);
+	const lastSegment = segments[segments.length - 1];
+	const pageNum = parseInt(lastSegment, 10);
+	const validPage = Number.isInteger(pageNum) && pageNum > 0 ? pageNum : 1;
+
+	return Author.handleLang(defaultLang, slug, validPage, request, env, ctx);
 });
 
 // Páginas Estáticas - /s/:slug/*
@@ -74,8 +88,15 @@ supportedLangs.forEach((lang) => {
 	// Categorias - /:lang/c/:slug/*
 	router.get(`/${lang}/c/:slug/*`, (request, env, ctx) => {
 		const { slug } = request.params;
-		const page = request.query.page || 1;
-		return Category.handleLang(lang, slug, page, request, env, ctx);
+
+		const url = new URL(request.url);
+		const pathname = url.pathname;
+		const segments = pathname.split('/').filter((segment) => segment.length > 0);
+		const lastSegment = segments[segments.length - 1];
+		const pageNum = parseInt(lastSegment, 10);
+		const validPage = Number.isInteger(pageNum) && pageNum > 0 ? pageNum : 1;
+
+		return Category.handleLang(lang, slug, validPage, request, env, ctx);
 	});
 
 	// Posts - /:lang/p/:slug/*
@@ -93,8 +114,15 @@ supportedLangs.forEach((lang) => {
 	// Autores - /:lang/a/:slug/*
 	router.get(`/${lang}/a/:slug/*`, (request, env, ctx) => {
 		const { slug } = request.params;
-		const page = request.query.page || 1;
-		return Author.handleLang(lang, slug, page, request, env, ctx);
+
+		const url = new URL(request.url);
+		const pathname = url.pathname;
+		const segments = pathname.split('/').filter((segment) => segment.length > 0);
+		const lastSegment = segments[segments.length - 1];
+		const pageNum = parseInt(lastSegment, 10);
+		const validPage = Number.isInteger(pageNum) && pageNum > 0 ? pageNum : 1;
+
+		return Author.handleLang(lang, slug, validPage, request, env, ctx);
 	});
 
 	// Páginas Estáticas - /:lang/s/:slug/*
