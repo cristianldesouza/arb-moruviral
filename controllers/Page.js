@@ -72,7 +72,7 @@ class Page {
 			status: 200,
 			headers: {
 				'Content-Type': 'text/html',
-				'Cache-Control': 'public, max-age=86400', // um dia de cache
+				'Cache-Control': `public, max-age=${constants.CACHE_CONTROL_TIME}`,
 			},
 		});
 
