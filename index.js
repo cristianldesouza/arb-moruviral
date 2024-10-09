@@ -257,6 +257,18 @@ export default {
 			needRedirect = true;
 		}
 
+		// Check if the first path segment is the default language
+		const pathSegments = url.pathname.split('/').filter((segment) => segment.length > 0);
+		if (pathSegments.length > 0 && pathSegments[0] === constants.LANGUAGES[0]) {
+			// Remove the first segment
+			pathSegments.shift();
+
+			// Reconstruct the pathname
+			url.pathname = '/' + pathSegments.join('/') + (pathSegments.length > 0 ? '/' : '');
+
+			needRedirect = true;
+		}
+
 		// If the URL doesn't end with a slash and doesn't have an extension
 		if (!url.pathname.endsWith('/') && !url.pathname.includes('.')) {
 			url.pathname += '/';

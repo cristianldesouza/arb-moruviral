@@ -81,7 +81,7 @@ class Contact {
 			body.domain = constants.DOMAIN;
 
 			// Forward the message to the CMS endpoint
-			const cmsResponse = await fetch('https://arb-cms.sitecdn.me/api/contact/message/', {
+			const cmsResponse = await fetch('https://metacms.highstakes.tech/api/contact/message/', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',

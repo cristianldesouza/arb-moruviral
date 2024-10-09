@@ -4,9 +4,12 @@ import constants from '../constants';
 import Elements from '../models/Elements';
 import NotFound from './NotFound';
 import Util from '../models/Util';
+import criticalCss from '../critical_post_css.txt';
 
 class Post {
 	async handleLang(lang, slug, request, env, ctx) {
+		console.log(request);
+
 		let postData = await Requests.getPostData(slug, lang, constants.DOMAIN);
 
 		if (!postData) {
@@ -41,9 +44,9 @@ class Post {
 					: 'https://' + constants.DOMAIN + '/' + lang + '/',
 		});
 
-		header = header
-			.split('<!-- custom headers -->')
-			.join(`<link rel="preload" as="image" href="${post.image}">`);
+		header = header.split('<!-- custom headers -->')
+			.join(`<link rel="preload" as="image" href="${post.image}">
+${criticalCss}`);
 
 		post.category_url =
 			constants.LANGUAGES[0] == lang

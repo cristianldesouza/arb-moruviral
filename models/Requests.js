@@ -3,7 +3,7 @@ class Requests {
 		console.log('Iniciando requisição...');
 
 		const apiUrl =
-			'https://arb-cms.sitecdn.me/api/posts/list/?access_token=8b728313e20494c2021594afa82bc5f3';
+			'https://metacms.highstakes.tech/api/posts/list/?access_token=8b728313e20494c2021594afa82bc5f3';
 		const startTime = Date.now(); // Marca o tempo de início
 
 		try {
@@ -52,7 +52,7 @@ class Requests {
 	// New method to get a post by its slug and language
 	getPostData(slug, language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://arb-cms.sitecdn.me/api/posts/get/${language}/${slug}/`;
+			const apiUrl = `https://metacms.highstakes.tech/api/posts/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -98,7 +98,7 @@ class Requests {
 
 	getCategoryData(slug, language, domain, page) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://arb-cms.sitecdn.me/api/categories/get/${language}/${slug}/`;
+			const apiUrl = `https://metacms.highstakes.tech/api/categories/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -145,7 +145,7 @@ class Requests {
 
 	getAuthorData(slug, language, domain, page) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://arb-cms.sitecdn.me/api/authors/get/${language}/${slug}/`;
+			const apiUrl = `https://metacms.highstakes.tech/api/authors/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -192,7 +192,7 @@ class Requests {
 
 	getPageData(slug, language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://arb-cms.sitecdn.me/api/pages/get/${language}/${slug}/`;
+			const apiUrl = `https://metacms.highstakes.tech/api/pages/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -239,7 +239,7 @@ class Requests {
 	getLastPosts(language, domain) {
 		return new Promise(async (resolve) => {
 			// Construct the API URL by injecting the language parameter
-			const apiUrl = `https://arb-cms.sitecdn.me/api/posts/get/last-posts/${language}/`;
+			const apiUrl = `https://metacms.highstakes.tech/api/posts/get/last-posts/${language}/`;
 
 			try {
 				// Make the fetch request to the API endpoint with method POST
@@ -286,7 +286,7 @@ class Requests {
 
 	getLandingData(slug, language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://arb-cms.sitecdn.me/api/landing/get/${language}/${slug}/`;
+			const apiUrl = `https://metacms.highstakes.tech/api/landing/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -332,7 +332,7 @@ class Requests {
 
 	getHomeData(language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://arb-cms.sitecdn.me/api/home/get/${language}/`;
+			const apiUrl = `https://metacms.highstakes.tech/api/home/get/${language}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
