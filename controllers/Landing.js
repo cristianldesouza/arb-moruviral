@@ -18,6 +18,10 @@ class Landing {
 			return NotFound.index(request, env, ctx);
 		}
 
+		if (post.type_id == 4) {
+			return Response.redirect(request.url.replace('/l/', '/p/'), 301);
+		}
+
 		post.content = JSON.parse(post.content);
 
 		let benefitsItem = false;
