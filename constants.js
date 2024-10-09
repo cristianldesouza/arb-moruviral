@@ -2,24 +2,31 @@ module.exports = Object.freeze({
 	CACHING: false,
 	PUBLIC_KEY:
 		'BBSIN_16XjPEEKOkcGwLHgnBFPjZgxBjFQHZ_BXn206dP3nzLpU7WryrIgmQ629AIg0rQo9I8Cl51QijEoOnsYk',
-	LANGUAGES: ['pt', 'es', 'en'],
+	LANGUAGES: ['pt', 'es', 'en', 'de', 'fr'],
 	DOMAIN: 'moruviral.com',
 	SITE_NAME: 'Moruviral',
 	SITE_SLOGAN: {
 		en: 'Smart Financial Choices',
+		pt: 'Escolhas Financeiras Inteligentes',
+		es: 'Elecciones Financieras Inteligentes',
+		de: 'Intelligente Finanzentscheidungen',
+		fr: 'Choix Financiers Intelligents',
 	},
 	SITE_DESCRIPTION: {
 		en: 'Moruviral is a financial comparison website that helps you make smart financial choices.',
 		pt: 'Moruviral é um site de comparação financeira que ajuda você a fazer escolhas financeiras inteligentes.',
+		es: 'Moruviral es un sitio web de comparación financiera que te ayuda a tomar decisiones financieras inteligentes.',
+		fr: 'Moruviral est un site de comparaison financière qui vous aide à faire des choix financiers intelligents.',
+		de: 'Moruviral ist eine Finanzvergleichs-Website, die Ihnen hilft, kluge finanzielle Entscheidungen zu treffen.',
 	},
 	MENU: {
 		pt: `<li><a href="/">Início</a></li>
-<li><a href="/c/educacao-financeira/">Educação Financeira</a></li>
-<li><a href="/c/empreendedorismo/">Empreendedorismo</a></li>
 <li><a href="/c/emprestimos-pessoais/">Empréstimos Pessoais</a></li>
 <li><a href="/c/cartoes-de-credito/">Cartões de Crédito</a></li>
+<li><a href="/c/mercado-financeiro/">Mercado Financeiro</a></li>
+<li><a href="/c/educacao-financeira/">Educação Financeira</a></li>
 <li><a href="/c/investimentos/">Investimentos</a></li>
-<li><a href="/c/mercado-financiero/">Mercado Financiero</a></li>`,
+<li><a href="/c/empreendedorismo/">Empreendedorismo</a></li>`,
 		en: `<li><a href="/en/">Home</a></li>
 <li><a href="/en/c/personal-loans/">Personal Loans</a></li>
 <li><a href="/en/c/credit-cards/">Credit Cards</a></li>
@@ -244,5 +251,12 @@ module.exports = Object.freeze({
 			fr: 'Précédent',
 			de: 'Vorherige',
 		},
+	},
+	DATE_FORMATS: {
+		en: 'MM/DD/YYYY',
+		es: 'DD/MM/YYYY',
+		pt: 'DD/MM/YYYY',
+		de: 'DD.MM.YYYY',
+		fr: 'DD/MM/YYYY',
 	},
 });

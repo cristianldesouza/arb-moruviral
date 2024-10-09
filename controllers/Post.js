@@ -33,13 +33,17 @@ class Post {
 			seo_title: post.seo_title || constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
 			seo_description:
 				post.seo_description || constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
-			seo_image: post.seo_image || post.avatar || '',
+			seo_image: post.seo_image || post.image || '',
 			seo_url: `https://${constants.DOMAIN}${pathName}`,
 			home_url:
 				lang === constants.LANGUAGES[0]
 					? 'https://' + constants.DOMAIN + '/'
 					: 'https://' + constants.DOMAIN + '/' + lang + '/',
 		});
+
+		header = header
+			.split('<!-- custom headers -->')
+			.join(`<link rel="preload" as="image" href="${post.image}">`);
 
 		let content = Template.renderTemplate('post_index', post);
 
@@ -78,13 +82,18 @@ class Post {
 			instagram: constants.SOCIAL_MEDIA.instagram,
 		});
 
-		let response = new Response(header + content + footer, {
-			status: 200,
-			headers: {
-				'Content-Type': 'text/html',
-				'Cache-Control': 'public, max-age=86400', // um dia de cache
-			},
-		});
+		let response = new Response(
+			(header + content + footer)
+				.split('https://hide-arb-cms-cdn.highstakes.tech/')
+				.join('https://cdn.moruviral.com/auto/auto/70/'),
+			{
+				status: 200,
+				headers: {
+					'Content-Type': 'text/html',
+					'Cache-Control': 'public, max-age=86400', // um dia de cache
+				},
+			}
+		);
 
 		ctx.waitUntil(caches.default.put(request.url.split('?')[0], response.clone()));
 

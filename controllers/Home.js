@@ -1,22 +1,8 @@
+import moment from 'moment-timezone';
 import Template from '../models/Template';
+import NotFound from './NotFound';
 import Requests from '../models/Requests';
 import constants from '../constants';
-
-const dummyData = {
-	post_featured_image: 'https://example.com/images/featured-image.jpg',
-	post_title: 'Como Aprender JavaScript em 30 Dias',
-	post_url: 'https://example.com/posts/como-aprender-javascript',
-	category_url: 'https://example.com/categories/programacao',
-	category_title: 'Programação',
-	post_date: '2024-10-02',
-	post_readtime: '5 min',
-};
-
-const dummyCategoryData = {
-	category_url: 'https://example.com/categories/saude',
-	category_title: 'Saúde',
-	category_image: 'https://via.placeholder.com/150', // URL de imagem de placeholder
-};
 
 function topPostsRender(mainPost, otherPosts) {
 	let items = '';
@@ -51,40 +37,75 @@ function popularCategories(categories) {
 
 class Home {
 	async handleHomeLang(lang, request, env, ctx) {
-		let k = await Requests.list();
+		let homeData = await Requests.getHomeData(lang, constants.DOMAIN);
+
+		if (!homeData) {
+			return NotFound.index(request, env, ctx);
+		}
+
+		for (let category of homeData.categories) {
+			category.url =
+				constants.LANGUAGES[0] == lang ? `/c/${category.slug}/` : `/${lang}/c/${category.slug}/`;
+
+			for (let post of category.last_posts) {
+				post.post_readtime = `${post.read_time} ${constants.READ_TIME[lang]}`;
+				post.post_date = moment(post.published_date, 'YYYY-MM-DD HH:mm').format(
+					constants.DATE_FORMATS[lang]
+				);
+				post.category_name = category.name;
+				post.category_slug = category.slug;
+
+				post.category_url =
+					constants.LANGUAGES[0] == lang
+						? `/c/${post.category_slug}/`
+						: `/${lang}/c/${post.category_slug}/`;
+
+				post.post_url =
+					constants.LANGUAGES[0] == lang ? `/p/${post.slug}/` : `/${lang}/p/${post.slug}/`;
+			}
+		}
+
+		for (let post of homeData.posts) {
+			post.post_readtime = `${post.read_time} ${constants.READ_TIME[lang]}`;
+			post.post_date = moment(post.published_date, 'YYYY-MM-DD HH:mm').format(
+				constants.DATE_FORMATS[lang]
+			);
+
+			post.category_name = post.category.name;
+			post.category_slug = post.category.slug;
+
+			post.category_url =
+				constants.LANGUAGES[0] == lang
+					? `/c/${post.category_slug}/`
+					: `/${lang}/c/${post.category_slug}/`;
+
+			post.post_url =
+				constants.LANGUAGES[0] == lang ? `/p/${post.slug}/` : `/${lang}/p/${post.slug}/`;
+		}
 
 		let header = Template.renderTemplate('header', {
 			lang,
 			menu: constants.MENU[lang],
 			seo_title: constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
 			seo_description: constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
-			seo_image: 'https://via.placeholder.com/1200x630',
+			seo_image: `https://${constants.DOMAIN}/public/logo.svg`,
 			seo_url:
 				lang === constants.LANGUAGES[0]
 					? 'https://' + constants.DOMAIN + '/'
 					: 'https://' + constants.DOMAIN + '/' + lang + '/',
 		});
 
-		let top_posts = topPostsRender(dummyData, [
-			dummyData,
-			dummyData,
-			dummyData,
-			dummyData,
-			dummyData,
-		]);
+		let top_posts = topPostsRender(homeData.posts[0], homeData.posts.slice(1));
 
-		let categories = mainCategoriesRender([dummyData, dummyData, dummyData, dummyData, dummyData]);
-		categories += mainCategoriesRender([dummyData, dummyData, dummyData, dummyData, dummyData]);
-		categories += mainCategoriesRender([dummyData, dummyData, dummyData, dummyData, dummyData]);
-		categories += mainCategoriesRender([dummyData, dummyData, dummyData, dummyData, dummyData]);
+		let categories = '';
 
-		let popular_categories = popularCategories([
-			dummyCategoryData,
-			dummyCategoryData,
-			dummyCategoryData,
-			dummyCategoryData,
-			dummyCategoryData,
-		]);
+		for (let category of homeData.categories) {
+			if (category.last_posts[0]) {
+				categories += mainCategoriesRender(category.last_posts);
+			}
+		}
+
+		let popular_categories = popularCategories(homeData.categories);
 
 		let content = Template.renderTemplate('home_index', {
 			top_posts,

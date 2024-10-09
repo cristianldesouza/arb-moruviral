@@ -54,6 +54,10 @@ class Landing {
 					: 'https://' + constants.DOMAIN + '/' + lang + '/',
 		});
 
+		header = header
+			.split('<!-- custom headers -->')
+			.join(`<link rel="preload" as="image" href="${post.image}">`);
+
 		let content = Template.renderTemplate('landing_index', post);
 
 		let replacesMap = {

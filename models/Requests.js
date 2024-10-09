@@ -329,6 +329,52 @@ class Requests {
 			}
 		});
 	}
+
+	getHomeData(language, domain) {
+		return new Promise(async (resolve) => {
+			const apiUrl = `https://arb-cms.sitecdn.me/api/home/get/${language}/`;
+
+			try {
+				// Make the fetch request to get the post, now with method POST to send domain in the body
+				const response = await fetch(apiUrl, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						domain, // Send the domain in the request body
+					}),
+				});
+
+				// Check if the response was successful
+				if (!response.ok) {
+					throw new Error(`Erro na requisição: ${response.status}`);
+				}
+
+				// Parse the response content
+				const contentType = response.headers.get('content-type');
+				let data;
+				if (contentType && contentType.includes('application/json')) {
+					// If the response is JSON, parse it
+					data = await response.json();
+				} else {
+					// Otherwise, treat it as text
+					data = await response.text();
+				}
+
+				// Return the post data if it's JSON and contains the 'post' key
+				if (data && typeof data === 'object' && 'post' in data) {
+					return resolve(data.post);
+				}
+
+				// Otherwise, return the whole response
+				return resolve(data);
+			} catch (error) {
+				console.error('Erro ao buscar post:', error.message);
+				return resolve(false);
+			}
+		});
+	}
 }
 
 module.exports = new Requests();

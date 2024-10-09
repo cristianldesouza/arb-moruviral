@@ -299,7 +299,7 @@ class EditorJsToHtmlConverter {
 		return `
 <div class="image-block ${classes}">
     ${iconHtml}
-    <img src="${this.sanitizeHtml(file.url)}" alt="${this.sanitizeHtml(caption || '')}">
+    <img loading="lazy" src="${this.sanitizeHtml(file.url)}" alt="${this.sanitizeHtml(caption || '')}">
     ${caption ? `<p class="caption">${this.sanitizeHtml(caption)}</p>` : ''}
 </div>
 `;

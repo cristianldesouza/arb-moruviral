@@ -26,7 +26,12 @@
                     </header>
                     <p>{ad_top}</p>
                     <div class="post-content">
-                        <img class="post-img" src="{{image}}" alt="{{title}}">
+                        <img
+                            class="post-img"
+                            src="{{image}}"
+                            alt="{{title}}"
+                            fetchpriority="high"
+                        >
                         {{benefitsItem}}
                         <p>
                             {{top_text}}
