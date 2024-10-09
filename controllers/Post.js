@@ -45,6 +45,16 @@ class Post {
 			.split('<!-- custom headers -->')
 			.join(`<link rel="preload" as="image" href="${post.image}">`);
 
+		post.category_url =
+			constants.LANGUAGES[0] == lang
+				? `/c/${post.category_slug}/`
+				: `/${lang}/c/${post.category_slug}/`;
+
+		post.author_url =
+			constants.LANGUAGES[0] == lang
+				? `/a/${post.author_slug}/`
+				: `/${lang}/a/${post.author_slug}/`;
+
 		let content = Template.renderTemplate('post_index', post);
 
 		let replacesMap = {
