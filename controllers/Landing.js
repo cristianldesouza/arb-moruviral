@@ -3,13 +3,10 @@ import Requests from '../models/Requests';
 import constants from '../constants';
 import Elements from '../models/Elements';
 import NotFound from './NotFound';
-import Util from '../models/Util';
 
 class Landing {
 	async handleLang(lang, slug, request, env, ctx) {
 		let postData = await Requests.getLandingData(slug, lang, constants.DOMAIN);
-
-		console.log(postData);
 
 		if (!postData) {
 			return NotFound.index(request, env, ctx);
@@ -57,6 +54,11 @@ class Landing {
 		header = header
 			.split('<!-- custom headers -->')
 			.join(`<link rel="preload" as="image" href="${post.image}">`);
+
+		post.category_url =
+			constants.LANGUAGES[0] == lang
+				? `/c/${post.category_slug}/`
+				: `/${lang}/c/${post.category_slug}/`;
 
 		let content = Template.renderTemplate('landing_index', post);
 
