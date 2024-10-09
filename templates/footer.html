@@ -82,7 +82,7 @@
 </footer>
 </div>
 <script
-    src="https://code.jquery.com/jquery-3.6.3.min.js"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
     crossorigin="anonymous"
     defer
@@ -91,10 +91,14 @@
 <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
+    media="print"
+    onload="this.onload=null;this.removeAttribute('media');"
+    fetchpriority="low"
 >
+<!-- no-JS fallback -->
+<noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+</noscript>
 <script>
     let currentIndex = 0;
     let cardWidth = 0;

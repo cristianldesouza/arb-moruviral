@@ -237,24 +237,40 @@ export default {
 
 export default {
 	fetch: async (request, env, ctx) => {
-		// Processa a requisição com o router
-		let response = await router.handle(request, env, ctx);
+		let url = new URL(request.url);
+		let needRedirect = false;
 
-		// Verifica se o Content-Type da resposta é HTML
-		const contentType = response.headers.get('Content-Type') || '';
+		// Ensure the protocol is HTTPS and host is 'moruviral.com' (without 'www.')
+		if (url.protocol !== 'https:' || url.hostname !== constants.DOMAIN) {
+			url.protocol = 'https:';
 
-		if (contentType.includes('text/html')) {
-			const url = new URL(request.url);
-
-			// Se a URL não termina com uma barra e não tem extensão
-			if (!url.pathname.endsWith('/') && !url.pathname.includes('.')) {
-				// Redireciona para a URL com barra no final (301 Permanent Redirect)
-				url.pathname += '/';
-				return Response.redirect(url.toString(), 302);
+			// Remove 'www.' from the hostname if present
+			if (url.hostname.startsWith('www.')) {
+				url.hostname = url.hostname.slice(4);
 			}
+
+			// Ensure the hostname is 'moruviral.com'
+			if (url.hostname !== constants.DOMAIN) {
+				url.hostname = constants.DOMAIN;
+			}
+
+			needRedirect = true;
 		}
 
-		// Retorna a resposta original, se não for necessário redirecionar
+		// If the URL doesn't end with a slash and doesn't have an extension
+		if (!url.pathname.endsWith('/') && !url.pathname.includes('.')) {
+			url.pathname += '/';
+			needRedirect = true;
+		}
+
+		// If a redirect is needed, perform it
+		if (needRedirect) {
+			return Response.redirect(url.toString(), 302);
+		}
+
+		// Process the request with the router
+		let response = await router.handle(request, env, ctx);
+
 		return response;
 	},
 };
