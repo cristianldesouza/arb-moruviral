@@ -151,7 +151,7 @@ module.exports = Object.freeze({
 		de: 'Neueste Artikel',
 	},
 	RELATED_TITLE: {
-		pt: 'Artígos Relacionados',
+		pt: 'Artigos Relacionados',
 		en: 'Related Articles',
 		es: 'Artículos Relacionados',
 		fr: 'Articles Connexes',
