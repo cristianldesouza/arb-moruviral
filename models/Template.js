@@ -199,7 +199,7 @@ class Template {
 				'{post.url}':
 					lang !== constants.LANGUAGES[0] ? `/${lang}/p/${post.slug}/` : `/p/${post.slug}/`,
 				'{post.title}': post.title,
-				'{post.featured_image}': post.image,
+				'{post.featured_image}': Util.generateCdnUrl(post.image, 360, 220, 70),
 				'{category.url}':
 					lang !== constants.LANGUAGES[0]
 						? `/${lang}/c/${post.category_slug}/`
@@ -256,7 +256,7 @@ class Template {
 				'{post.url}':
 					lang !== constants.LANGUAGES[0] ? `/${lang}/p/${post.slug}/` : `/p/${post.slug}/`,
 				'{post.title}': post.title,
-				'{post.thumbnail}': post.image,
+				'{post.thumbnail}': Util.generateCdnUrl(post.image, 360, 220, 70),
 				'{category.url}':
 					lang !== constants.LANGUAGES[0]
 						? `/${lang}/c/${post.category_slug}/`

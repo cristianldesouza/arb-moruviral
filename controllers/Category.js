@@ -2,6 +2,7 @@ import Template from '../models/Template';
 import Requests from '../models/Requests';
 import constants from '../constants';
 import NotFound from './NotFound';
+import Util from '../models/Util';
 
 class Category {
 	async handleLang(lang, slug, page, request, env, ctx) {
@@ -30,6 +31,7 @@ class Category {
 					: 'https://' + constants.DOMAIN + '/' + lang + '/',
 		});
 
+		category.image = Util.generateCdnUrl(category.image, 750, 400, 70);
 		let content = Template.renderTemplate('category_index', category);
 
 		let replacesMap = {

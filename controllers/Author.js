@@ -3,6 +3,7 @@ import Requests from '../models/Requests';
 import constants from '../constants';
 import Elements from '../models/Elements';
 import NotFound from './NotFound';
+import Util from '../models/Util';
 
 class Author {
 	async handleLang(lang, slug, page, request, env, ctx) {
@@ -33,6 +34,7 @@ class Author {
 
 		author.bio = JSON.parse(author.bio);
 		author.bio = Elements.convert(author.bio);
+		author.avatar = Util.generateCdnUrl(author.avatar, 100, 100, 70);
 
 		let content = Template.renderTemplate('author_index', author);
 
