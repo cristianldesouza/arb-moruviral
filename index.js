@@ -15,6 +15,7 @@ import Home from './controllers/Home';
 import Post from './controllers/Post';
 import Landing from './controllers/Landing';
 import Caching from './models/Caching';
+import Requests from './models/Requests';
 
 const assetManifest = JSON.parse(manifestJSON);
 
@@ -24,6 +25,48 @@ const router = Router();
 
 const defaultLang = languages[0];
 const supportedLangs = languages.slice(1); // ['en', 'es']
+
+router.get('/ads.txt', Caching.defaultCache, async (request, env, ctx) => {
+	let config = await Requests.getDomainConfig(constants.DOMAIN);
+	let content = '';
+
+	if (config && config.config) {
+		content = config.config?.ads_txt;
+	}
+
+	let response = new Response(content, {
+		status: 200,
+		headers: {
+			'Content-Type': 'text/plain; charset=utf-8',
+			'Cache-Control': `public, max-age=${constants.CACHE_CONTROL_TIME}`,
+		},
+	});
+
+	ctx.waitUntil(caches.default.put(request.url.split('?')[0], response.clone()));
+
+	return response;
+});
+
+router.get('/robots.txt', Caching.defaultCache, async (request, env, ctx) => {
+	let config = await Requests.getDomainConfig(constants.DOMAIN);
+	let content = '';
+
+	if (config && config.config) {
+		content = config.config?.robots_txt;
+	}
+
+	let response = new Response(content, {
+		status: 200,
+		headers: {
+			'Content-Type': 'text/plain; charset=utf-8',
+			'Cache-Control': `public, max-age=${constants.CACHE_CONTROL_TIME}`,
+		},
+	});
+
+	ctx.waitUntil(caches.default.put(request.url.split('?')[0], response.clone()));
+
+	return response;
+});
 
 // Home Page
 router.get('/', Caching.defaultCache, (request, env, ctx) => {

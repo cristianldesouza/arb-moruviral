@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 class Requests {
 	async list() {
 		console.log('Iniciando requisição...');
@@ -373,6 +375,32 @@ class Requests {
 				console.error('Erro ao buscar post:', error.message);
 				return resolve(false);
 			}
+		});
+	}
+
+	getDomainConfig(domain) {
+		return new Promise(async (resolve) => {
+			const options = {
+				method: 'GET',
+				url: 'https://metacms.highstakes.tech/api/domain_configs/get/',
+				params: {
+					time_range: '{"since":"2024-09-28","until":"2024-09-28"}',
+					fields: 'spend',
+					access_token:
+						'EAAKwfZB5ebTEBO9ZAbCDxxvu7xDOFjEojJ2A79TRnK8T22q3IqrqvgkQt7nzUQdUZBZC8gR8jOJPujyJTowJ75ObNbJ4c0Eza5vlNyoJ5oI0vDHfVVKA6ZAbQ8TaU4yjHeFAtFjCyB0MTmlEM3rEYXa02OAZCmhJzqkJxtjm5XReS9VEpc1fEGkZCex2ovgK7T72xPI8aXzmlXBazvpC0e1GM2d20ZCVJOmRsGcGj6DyiradMHF3SHIM',
+					domain_name: 'moruviral.com',
+				},
+				headers: { 'Content-Type': 'application/json' },
+			};
+
+			axios
+				.request(options)
+				.then(function (response) {
+					return resolve(response.data);
+				})
+				.catch(function (error) {
+					return resolve({});
+				});
 		});
 	}
 }
