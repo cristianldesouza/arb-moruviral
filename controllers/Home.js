@@ -3,11 +3,14 @@ import Template from '../models/Template';
 import NotFound from './NotFound';
 import Requests from '../models/Requests';
 import constants from '../constants';
+import Util from '../models/Util';
 
 function topPostsRender(mainPost, otherPosts) {
 	let items = '';
+	mainPost.image = Util.generateCdnUrl(mainPost.image, 750, 470, 70);
 
 	for (let each of otherPosts) {
+		each.image = Util.generateCdnUrl(each.image, 360, 220, 70);
 		items += Template.renderTemplate('home_top_posts_item', each);
 	}
 
@@ -16,9 +19,12 @@ function topPostsRender(mainPost, otherPosts) {
 
 function mainCategoriesRender(posts, renderWithColTwelve = false) {
 	let mainPost = posts[0];
+	mainPost.image = Util.generateCdnUrl(mainPost.image, 555, 336, 70);
 	let items = '';
 
 	for (let i = 1; i < posts.length; i++) {
+		posts[i].image = Util.generateCdnUrl(posts[i].image, 128, 104, 70);
+
 		items += Template.renderTemplate('home_category_item', posts[i]);
 	}
 
@@ -36,6 +42,7 @@ function popularCategories(categories) {
 	let items = '';
 
 	for (let each of categories) {
+		each.image = Util.generateCdnUrl(each.image, 270, 100, 70);
 		items += Template.renderTemplate('home_category_popular', each);
 	}
 

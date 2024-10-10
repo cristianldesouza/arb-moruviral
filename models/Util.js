@@ -10,6 +10,18 @@ class Util {
 
 		return readTimeInMinutes;
 	}
+
+	generateCdnUrl(url, width, height, quality) {
+		// Parse the original URL to get the domain and file path
+		const urlParts = url.split('/');
+		const domain = urlParts[3]; // Get the domain part (e.g., moruviral.com)
+		const imagePath = urlParts.slice(4).join('/'); // Get the remaining part of the URL
+
+		// Construct the new CDN URL
+		const cdnUrl = `https://cdn.${domain}/${width}/${height}/${quality}/${domain}/${imagePath}`;
+
+		return cdnUrl;
+	}
 }
 
 // Função recursiva para extrair textos das chaves especificadas

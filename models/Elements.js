@@ -1,3 +1,5 @@
+import Util from './Util';
+
 class EditorJsToHtmlConverter {
 	/**
 	 * Converte uma matriz de blocos do EditorJS para HTML.
@@ -299,7 +301,9 @@ class EditorJsToHtmlConverter {
 		return `
 <div class="image-block ${classes}">
     ${iconHtml}
-    <img loading="lazy" src="${this.sanitizeHtml(file.url)}" alt="${this.sanitizeHtml(caption || '')}">
+    <img loading="lazy" src="${this.sanitizeHtml(
+		Util.generateCdnUrl(file.url, 750, 420, 70)
+	)}" alt="${this.sanitizeHtml(caption || '')}">
     ${caption ? `<p class="caption">${this.sanitizeHtml(caption)}</p>` : ''}
 </div>
 `;

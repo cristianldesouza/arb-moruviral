@@ -61,6 +61,8 @@ ${criticalCss}`);
 			constants.DATE_FORMATS[lang]
 		);
 
+		post.image = Util.generateCdnUrl(post.image, 750, 450, 70);
+
 		let content = Template.renderTemplate('post_index', post);
 
 		let replacesMap = {
@@ -98,18 +100,13 @@ ${criticalCss}`);
 			instagram: constants.SOCIAL_MEDIA.instagram,
 		});
 
-		let response = new Response(
-			(header + content + footer)
-				.split('https://hide-arb-cms-cdn.highstakes.tech/')
-				.join('https://cdn.moruviral.com/auto/auto/70/'),
-			{
-				status: 200,
-				headers: {
-					'Content-Type': 'text/html',
-					'Cache-Control': `public, max-age=${constants.CACHE_CONTROL_TIME}`,
-				},
-			}
-		);
+		let response = new Response(header + content + footer, {
+			status: 200,
+			headers: {
+				'Content-Type': 'text/html',
+				'Cache-Control': `public, max-age=${constants.CACHE_CONTROL_TIME}`,
+			},
+		});
 
 		ctx.waitUntil(caches.default.put(request.url.split('?')[0], response.clone()));
 
