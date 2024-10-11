@@ -88,11 +88,11 @@ module.exports = Object.freeze({
 			 <li><a href="/en/s/terms-of-use/">Terms of Use</a></li>`,
 
 		es: `<li><a href="/es/s/acerca-de-mejorescreditos/">Acerca de</a></li>
-			 <li><a href="/es/s/contacto/">Contacto</a></li>
+			 <li><a href="/es/s/contact/">Contacto</a></li>
 			 <li><a href="/es/s/terminos-de-uso/">Términos de Uso</a></li>`,
 
 		pt: `<li><a href="/s/sobre-o-mejorescreditos/">Sobre</a></li>
-			 <li><a href="/s/contato/">Contato</a></li>
+			 <li><a href="/s/contact/">Contato</a></li>
 			 <li><a href="/s/termos-de-uso/">Termos de Uso</a></li>`,
 
 		fr: `<li><a href="/fr/s/a-propos-de-mejorescreditos/">À propos</a></li>
@@ -100,7 +100,7 @@ module.exports = Object.freeze({
 			 <li><a href="/fr/s/conditions-dutilisation/">Conditions d'utilisation</a></li>`,
 
 		de: `<li><a href="/de/s/uber-mejorescreditos/">Über</a></li>
-			 <li><a href="/de/s/kontakt/">Kontakt</a></li>
+			 <li><a href="/de/s/contact/">Kontakt</a></li>
 			 <li><a href="/de/s/nutzungsbedingungen/">Nutzungsbedingungen</a></li>`,
 	},
 	FOOTER_RIGHT_MENU: {
