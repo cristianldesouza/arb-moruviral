@@ -101,6 +101,10 @@ router.get('/l/:slug/*', (request, env, ctx) => {
 	return Landing.handleLang(defaultLang, slug, request, env, ctx);
 });
 
+router.get('/a/', (request, env, ctx) => {
+	return Author.authorsListLang(defaultLang, request, env, ctx);
+});
+
 // Autores - /a/:slug/*
 router.get('/a/:slug/*', (request, env, ctx) => {
 	const { slug } = request.params;
@@ -152,6 +156,10 @@ supportedLangs.forEach((lang) => {
 	router.get(`/${lang}/l/:slug/*`, (request, env, ctx) => {
 		const { slug } = request.params;
 		return Landing.handleLang(lang, slug, request, env, ctx);
+	});
+
+	router.get(`/${lang}/a/`, (request, env, ctx) => {
+		return Author.authorsListLang(lang, request, env, ctx);
 	});
 
 	// Autores - /:lang/a/:slug/*

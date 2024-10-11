@@ -1,11 +1,11 @@
+import constants from '../constants';
 import axios from 'axios';
 
 class Requests {
 	async list() {
 		console.log('Iniciando requisição...');
 
-		const apiUrl =
-			'https://metacms.highstakes.tech/api/posts/list/?access_token=8b728313e20494c2021594afa82bc5f3';
+		const apiUrl = `${constants.CMS_ENDPOINT}/api/posts/list/?access_token=8b728313e20494c2021594afa82bc5f3`;
 		const startTime = Date.now(); // Marca o tempo de início
 
 		try {
@@ -54,7 +54,7 @@ class Requests {
 	// New method to get a post by its slug and language
 	getPostData(slug, language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://metacms.highstakes.tech/api/posts/get/${language}/${slug}/`;
+			const apiUrl = `${constants.CMS_ENDPOINT}/api/posts/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -100,7 +100,7 @@ class Requests {
 
 	getCategoryData(slug, language, domain, page) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://metacms.highstakes.tech/api/categories/get/${language}/${slug}/`;
+			const apiUrl = `${constants.CMS_ENDPOINT}/api/categories/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -147,7 +147,7 @@ class Requests {
 
 	getAuthorData(slug, language, domain, page) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://metacms.highstakes.tech/api/authors/get/${language}/${slug}/`;
+			const apiUrl = `${constants.CMS_ENDPOINT}/api/authors/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -194,7 +194,7 @@ class Requests {
 
 	getPageData(slug, language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://metacms.highstakes.tech/api/pages/get/${language}/${slug}/`;
+			const apiUrl = `${constants.CMS_ENDPOINT}/api/pages/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -241,7 +241,7 @@ class Requests {
 	getLastPosts(language, domain) {
 		return new Promise(async (resolve) => {
 			// Construct the API URL by injecting the language parameter
-			const apiUrl = `https://metacms.highstakes.tech/api/posts/get/last-posts/${language}/`;
+			const apiUrl = `${constants.CMS_ENDPOINT}/api/posts/get/last-posts/${language}/`;
 
 			try {
 				// Make the fetch request to the API endpoint with method POST
@@ -288,7 +288,7 @@ class Requests {
 
 	getLandingData(slug, language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://metacms.highstakes.tech/api/landing/get/${language}/${slug}/`;
+			const apiUrl = `${constants.CMS_ENDPOINT}/api/landing/get/${language}/${slug}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -334,7 +334,7 @@ class Requests {
 
 	getHomeData(language, domain) {
 		return new Promise(async (resolve) => {
-			const apiUrl = `https://metacms.highstakes.tech/api/home/get/${language}/`;
+			const apiUrl = `${constants.CMS_ENDPOINT}/api/home/get/${language}/`;
 
 			try {
 				// Make the fetch request to get the post, now with method POST to send domain in the body
@@ -382,7 +382,7 @@ class Requests {
 		return new Promise(async (resolve) => {
 			const options = {
 				method: 'GET',
-				url: 'https://metacms.highstakes.tech/api/domain_configs/get/',
+				url: `${constants.CMS_ENDPOINT}/api/domain_configs/get/`,
 				params: {
 					time_range: '{"since":"2024-09-28","until":"2024-09-28"}',
 					fields: 'spend',
@@ -403,6 +403,32 @@ class Requests {
 				});
 		});
 	}
+
+	async getAuthorsListData(lang) {
+		try {
+			const response = await fetch(`${constants.CMS_ENDPOINT}/api/authors/list/get/${lang}/`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					domain: constants.DOMAIN,
+					lang: lang,
+				}),
+			});
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				throw new Error(errorData.message || 'Falha ao buscar a lista de autores');
+			}
+
+			const data = await response.json();
+			return data; // { authors: [...], last_posts: [...] }
+		} catch (error) {
+			console.error('Erro ao buscar a lista de autores:', error);
+			throw error;
+		}
+	}
 }
 
-module.exports = new Requests();
+export default new Requests();

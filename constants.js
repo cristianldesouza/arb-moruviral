@@ -1,6 +1,7 @@
 module.exports = Object.freeze({
 	CACHING: true,
 	CACHE_CONTROL_TIME: 86400,
+	CMS_ENDPOINT: 'https://metacms.highstakes.tech',
 	PUBLIC_KEY:
 		'BBSIN_16XjPEEKOkcGwLHgnBFPjZgxBjFQHZ_BXn206dP3nzLpU7WryrIgmQ629AIg0rQo9I8Cl51QijEoOnsYk',
 	LANGUAGES: ['pt', 'es', 'en', 'de', 'fr'],
@@ -259,5 +260,12 @@ module.exports = Object.freeze({
 		pt: 'DD/MM/YYYY',
 		de: 'DD.MM.YYYY',
 		fr: 'DD/MM/YYYY',
+	},
+	AUTHORS_LIST_TITLE: {
+		en: 'Authors',
+		es: 'Autores',
+		pt: 'Autores',
+		de: 'Autoren',
+		fr: 'Auteurs',
 	},
 });

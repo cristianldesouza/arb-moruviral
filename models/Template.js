@@ -43,6 +43,8 @@ import author_index from '../templates/author/index.html';
 import author_social_medias from '../templates/author/social-media.html';
 import author_posts_list from '../templates/author/posts.html';
 import author_posts_item from '../templates/author/item.html';
+import authors_index from '../templates/author/list.html';
+import authors_card from '../templates/author/author-item.html';
 
 // page templates
 import page_index from '../templates/static/index.html';
@@ -75,6 +77,8 @@ const templates = Object.freeze({
 	author_social_medias,
 	author_posts_list,
 	author_posts_item,
+	authors_index,
+	authors_card,
 	page_index,
 });
 
