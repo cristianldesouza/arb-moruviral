@@ -49,6 +49,10 @@ import authors_card from '../templates/author/author-item.html';
 // page templates
 import page_index from '../templates/static/index.html';
 
+// aggregators templates
+import aggregator_index from '../templates/aggregator/index.html';
+import aggregator_post from '../templates/aggregator/post.html';
+
 const templates = Object.freeze({
 	header,
 	footer,
@@ -80,6 +84,8 @@ const templates = Object.freeze({
 	authors_index,
 	authors_card,
 	page_index,
+	aggregator_index,
+	aggregator_post,
 });
 
 class Template {

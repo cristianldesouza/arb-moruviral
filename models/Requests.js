@@ -429,6 +429,37 @@ class Requests {
 			throw error;
 		}
 	}
+
+	async getAggregatorData(lang, slug) {
+		try {
+			const response = await fetch(
+				`${constants.CMS_ENDPOINT}/api/aggregators/get/${slug}?lang=${lang}&domain=${constants.DOMAIN}`,
+				{
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						domain: constants.DOMAIN,
+						lang: lang,
+					}),
+				}
+			);
+
+			if (!response.ok) {
+				const errorData = await response.json();
+				throw new Error(errorData.message || 'Falha ao buscar a lista de autores');
+			}
+
+			console.log(response.data);
+
+			const data = await response.json();
+			return data; // { authors: [...], last_posts: [...] }
+		} catch (error) {
+			console.error('Erro ao buscar a agregador:', error);
+			throw error;
+		}
+	}
 }
 
 export default new Requests();

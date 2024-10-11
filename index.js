@@ -14,6 +14,7 @@ import constants from './constants';
 import Home from './controllers/Home';
 import Post from './controllers/Post';
 import Landing from './controllers/Landing';
+import Aggregator from './controllers/Aggregator';
 import Caching from './models/Caching';
 import Requests from './models/Requests';
 
@@ -101,6 +102,12 @@ router.get('/l/:slug/*', (request, env, ctx) => {
 	return Landing.handleLang(defaultLang, slug, request, env, ctx);
 });
 
+// Aggregators - /m/:slug/*
+router.get('/m/:slug/*', (request, env, ctx) => {
+	const { slug } = request.params;
+	return Aggregator.handleAggregatorLang(defaultLang, slug, request, env, ctx);
+});
+
 router.get('/a/', (request, env, ctx) => {
 	return Author.authorsListLang(defaultLang, request, env, ctx);
 });
@@ -156,6 +163,12 @@ supportedLangs.forEach((lang) => {
 	router.get(`/${lang}/l/:slug/*`, (request, env, ctx) => {
 		const { slug } = request.params;
 		return Landing.handleLang(lang, slug, request, env, ctx);
+	});
+
+	// Aggregators - /m/:slug/*
+	router.get(`/${lang}/m/:slug/*`, (request, env, ctx) => {
+		const { slug } = request.params;
+		return Aggregator.handleAggregatorLang(lang, slug, request, env, ctx);
 	});
 
 	router.get(`/${lang}/a/`, (request, env, ctx) => {
