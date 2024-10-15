@@ -268,4 +268,26 @@ module.exports = Object.freeze({
 		de: 'Autoren',
 		fr: 'Auteurs',
 	},
+	NOT_FOUND: {
+		pt: {
+			TITLE: 'Página não encontrada',
+			TEXT: 'A URL pode estar incorreta ou a página pode não existir mais.',
+		},
+		en: {
+			TITLE: 'Page Not Found',
+			TEXT: 'The URL might be incorrect or the page may no longer exist.',
+		},
+		es: {
+			TITLE: 'Página no encontrada',
+			TEXT: 'Puede que la URL sea incorrecta o que la página ya no exista.',
+		},
+		de: {
+			TITLE: 'Seite nicht gefunden',
+			TEXT: 'Die URL könnte falsch sein oder die Seite existiert nicht mehr.',
+		},
+		fr: {
+			TITLE: 'Page non trouvée',
+			TEXT: "L'URL est peut-être incorrecte ou la page n'existe plus.",
+		},
+	},
 });

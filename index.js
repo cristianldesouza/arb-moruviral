@@ -285,7 +285,9 @@ router.get('/public/*', Caching.defaultCache, async (request, env, ctx) => {
 
 // 404 handler
 import NotFound from './controllers/NotFound';
-router.all('*', NotFound.index);
+router.all('*', (request, env, ctx) => {
+	return NotFound.index(defaultLang, request, env, ctx);
+});
 
 // Export the worker
 /*
