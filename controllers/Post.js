@@ -17,6 +17,7 @@ class Post {
 			}
 
 			let post = postData.post_data;
+			let innerRelatedPost = postData.inner_related_posts;
 
 			if (!post.content) {
 				return NotFound.index(lang, request, env, ctx);
@@ -88,6 +89,29 @@ ${criticalCss}`);
 			content = Template.insertAdsToPage(content);
 			content = Template.injectCta(content, ctaData);
 
+			if (postData.inner_related_posts) {
+				content = content.replace(/\[related\]/g, function () {
+					// Shift the first post from innerRelatedPosts and generate HTML
+					const relatedPost = innerRelatedPost.shift();
+
+					if (!relatedPost) {
+						return '';
+					}
+
+					let innerContentHtml = Template.renderTemplate('related_inner_item', {
+						read_also: constants.READ_ALSO[lang],
+						title: relatedPost.title,
+						thumbnail: Util.generateCdnUrl(relatedPost.image, 750, 450, 70),
+						post_url:
+							constants.LANGUAGES[0] == lang
+								? `/p/${relatedPost.slug}/`
+								: `/${lang}/p/${relatedPost.slug}/`,
+					});
+
+					return innerContentHtml;
+				});
+			}
+
 			let footer = Template.renderTemplate('footer', {
 				sitedomain: constants.DOMAIN,
 				sitename: constants.SITE_NAME,
@@ -101,6 +125,17 @@ ${criticalCss}`);
 				instagram: constants.SOCIAL_MEDIA.instagram,
 			});
 
+			footer = footer.replace(
+				'<!-- custom script -->',
+				`<script>document.querySelectorAll('.read-also-box').forEach(function (box) {
+	box.addEventListener('click', function () {
+		const postUrl = this.getAttribute('data-post-url');
+		if (postUrl) {
+			window.location.href = postUrl; // Redirect to post_url
+		}
+	});
+});</script>`
+			);
 			let response = new Response(header + content + footer, {
 				status: 200,
 				headers: {

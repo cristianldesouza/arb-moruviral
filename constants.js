@@ -290,4 +290,11 @@ module.exports = Object.freeze({
 			TEXT: "L'URL est peut-être incorrecte ou la page n'existe plus.",
 		},
 	},
+	READ_ALSO: {
+		pt: 'Leia também...',
+		en: 'Read also...',
+		es: 'Lee también...',
+		de: 'Lies auch...',
+		fr: 'Lire aussi...',
+	},
 });

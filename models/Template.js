@@ -18,6 +18,7 @@ import sidebar_item from '../templates/sidebar/item.html';
 // related templtes
 import related_index from '../templates/related/index.html';
 import related_item from '../templates/related/item.html';
+import related_inner_item from '../templates/related/inner-item.html';
 
 // home templates
 import home_index from '../templates/home/index.html';
@@ -64,6 +65,7 @@ const templates = Object.freeze({
 	contact_index,
 	sidebar_index,
 	sidebar_item,
+	related_inner_item,
 	related_index,
 	related_item,
 	home_index,

@@ -86,7 +86,7 @@ class Author {
 
 			// 2. Handle missing data
 			if (!authorsListData || !authorsListData.authors || authorsListData.authors.length === 0) {
-				return NotFound.index(request, env, ctx, lang);
+				return NotFound.index(lang, request, env, ctx);
 			}
 
 			// 3. Prepare header with SEO data
@@ -163,10 +163,7 @@ class Author {
 			return response;
 		} catch (error) {
 			console.error('Error in authorsListLang handler:', error);
-			return new Response('Erro interno ao carregar a lista de autores.', {
-				status: 500,
-				headers: { 'Content-Type': 'text/html' },
-			});
+			return NotFound.index(lang, request, env, ctx);
 		}
 	}
 }
