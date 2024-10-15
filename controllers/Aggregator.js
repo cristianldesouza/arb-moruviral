@@ -101,6 +101,12 @@ class Aggregator {
 			const thisUrl = new URL(request.url);
 			const pathName = thisUrl.pathname;
 
+			let seoImage = aggregator.seo_image;
+
+			seoImage = seoImage
+				? Util.generateCdnUrl(seoImage, 750, 450, 70)
+				: `https://${constants.DOMAIN}/public/logo.svg`;
+
 			let header = Template.renderTemplate('header', {
 				lang,
 				menu: constants.MENU[lang],
@@ -109,7 +115,7 @@ class Aggregator {
 				seo_description:
 					aggregator.seo_description ||
 					constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
-				seo_image: aggregator.seo_image || '',
+				seo_image: seoImage,
 				seo_url: `https://${constants.DOMAIN}${pathName}`,
 				home_url:
 					lang === constants.LANGUAGES[0]
@@ -119,7 +125,7 @@ class Aggregator {
 
 			// Include any critical CSS or additional headers
 			header = header.split('<!-- custom headers -->')
-				.join(`<link rel="preload" as="image" href="${aggregator.seo_image}">
+				.join(`<link rel="preload" as="image" href="${seoImage}">
     ${criticalCss}`);
 
 			// Prepare content by rendering the aggregator template

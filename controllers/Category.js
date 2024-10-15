@@ -18,6 +18,8 @@ class Category {
 			const thisUrl = new URL(request.url);
 			const pathName = thisUrl.pathname;
 
+			let seoImage = category.seo_image || category.image || false;
+
 			let header = Template.renderTemplate('header', {
 				lang,
 				menu: constants.MENU[lang],
@@ -26,7 +28,9 @@ class Category {
 				seo_description:
 					category.seo_description ||
 					constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
-				seo_image: category.seo_image || category.avatar || '',
+				seo_image: seoImage
+					? Util.generateCdnUrl(seoImage, 750, 450, 70)
+					: `https://${constants.DOMAIN}/public/logo.svg`,
 				seo_url: `https://${constants.DOMAIN}${pathName}`,
 				home_url:
 					lang === constants.LANGUAGES[0]
