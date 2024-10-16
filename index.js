@@ -17,6 +17,7 @@ import Landing from './controllers/Landing';
 import Aggregator from './controllers/Aggregator';
 import Caching from './models/Caching';
 import Requests from './models/Requests';
+import Sitemap from './controllers/Sitemap';
 
 const assetManifest = JSON.parse(manifestJSON);
 
@@ -26,6 +27,12 @@ const router = Router();
 
 const defaultLang = languages[0];
 const supportedLangs = languages.slice(1); // ['en', 'es']
+
+router.get('/sitemap.xml', Caching.defaultCache, Sitemap.sitemapXml);
+
+for (let lang of supportedLangs) {
+	router.get(`/${lang}/sitemap.xml`, Caching.defaultCache, Sitemap.sitemapXml);
+}
 
 router.get('/ads.txt', Caching.defaultCache, async (request, env, ctx) => {
 	let config = await Requests.getDomainConfig(constants.DOMAIN);
