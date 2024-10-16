@@ -12,7 +12,7 @@ class Contact {
 			menu: constants.MENU[lang],
 			seo_title: constants.SITE_NAME + ' - ' + constants.CONTACT_DATA.TITLE[lang],
 			seo_description: constants.SITE_NAME + ' - ' + constants.CONTACT_DATA.SUBTITLE[lang],
-			seo_image: `https://${constants.DOMAIN}/public/logo.svg`,
+			seo_image: `https://${constants.DOMAIN}/public/img/logo.svg`,
 			seo_url: `https://${constants.DOMAIN}${pathName}`,
 			home_url:
 				lang === constants.LANGUAGES[0]

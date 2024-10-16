@@ -28,7 +28,7 @@ class Author {
 				author.seo_description || constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
 			seo_image: seoImage
 				? Util.generateCdnUrl(seoImage, 750, 450, 70)
-				: `https://${constants.DOMAIN}/public/logo.svg`,
+				: `https://${constants.DOMAIN}/public/img/logo.svg`,
 			seo_url: `https://${constants.DOMAIN}${pathName}`,
 			home_url:
 				lang === constants.LANGUAGES[0]

@@ -105,7 +105,7 @@ class Aggregator {
 
 			seoImage = seoImage
 				? Util.generateCdnUrl(seoImage, 750, 450, 70)
-				: `https://${constants.DOMAIN}/public/logo.svg`;
+				: `https://${constants.DOMAIN}/public/img/logo.svg`;
 
 			let header = Template.renderTemplate('header', {
 				lang,

@@ -105,11 +105,15 @@ class Home {
 				menu: constants.MENU[lang],
 				seo_title: constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
 				seo_description: constants.SITE_NAME + ' - ' + constants.SITE_SLOGAN[lang],
-				seo_image: `https://${constants.DOMAIN}/public/logo.svg`,
+				seo_image: `https://${constants.DOMAIN}/public/img/logo.svg`,
 				seo_url:
 					lang === constants.LANGUAGES[0]
 						? 'https://' + constants.DOMAIN + '/'
 						: 'https://' + constants.DOMAIN + '/' + lang + '/',
+				home_url:
+					lang === constants.LANGUAGES[0]
+						? `https://${constants.DOMAIN}/`
+						: `https://${constants.DOMAIN}/${lang}/`,
 			});
 
 			let top_posts = topPostsRender(homeData.posts[0], homeData.posts.slice(1));

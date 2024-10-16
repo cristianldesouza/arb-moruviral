@@ -84,23 +84,23 @@ module.exports = Object.freeze({
 	},
 	LOGO_URL: 'https://via.placeholder.com/150',
 	FOOTER_LEFT_MENU: {
-		en: `<li><a href="/en/s/about-the-mejorescreditos/">About</a></li>
+		en: `<li><a href="/en/s/about-us/">About</a></li>
 			 <li><a href="/en/s/contact/">Contact</a></li>
 			 <li><a href="/en/s/terms-of-use/">Terms of Use</a></li>`,
 
-		es: `<li><a href="/es/s/acerca-de-mejorescreditos/">Acerca de</a></li>
+		es: `<li><a href="/es/s/acerca/">Acerca de</a></li>
 			 <li><a href="/es/s/contact/">Contacto</a></li>
 			 <li><a href="/es/s/terminos-de-uso/">Términos de Uso</a></li>`,
 
-		pt: `<li><a href="/s/sobre-o-mejorescreditos/">Sobre</a></li>
+		pt: `<li><a href="/s/sobre/">Sobre</a></li>
 			 <li><a href="/s/contact/">Contato</a></li>
 			 <li><a href="/s/termos-de-uso/">Termos de Uso</a></li>`,
 
-		fr: `<li><a href="/fr/s/a-propos-de-mejorescreditos/">À propos</a></li>
+		fr: `<li><a href="/fr/s/a-propos/">À propos</a></li>
 			 <li><a href="/fr/s/contact/">Contact</a></li>
 			 <li><a href="/fr/s/conditions-dutilisation/">Conditions d'utilisation</a></li>`,
 
-		de: `<li><a href="/de/s/uber-mejorescreditos/">Über</a></li>
+		de: `<li><a href="/de/s/uber/">Über</a></li>
 			 <li><a href="/de/s/contact/">Kontakt</a></li>
 			 <li><a href="/de/s/nutzungsbedingungen/">Nutzungsbedingungen</a></li>`,
 	},
