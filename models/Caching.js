@@ -32,4 +32,4 @@ class Caching {
 	}
 }
 
-module.exports = new Caching();
+export default new Caching();
