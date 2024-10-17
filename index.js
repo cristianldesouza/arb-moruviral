@@ -84,7 +84,7 @@ router.get('/', Caching.defaultCache, (request, env, ctx) => {
 router.post('/api/contact/message/', Contact.receiveMessage);
 
 // Categorias - /c/:slug/*
-router.get('/c/:slug/*', (request, env, ctx) => {
+router.get('/c/:slug/*', Caching.defaultCache, (request, env, ctx) => {
 	const { slug } = request.params;
 
 	const url = new URL(request.url);
@@ -104,23 +104,23 @@ router.get('/p/:slug/*', Caching.defaultCache, (request, env, ctx) => {
 });
 
 // Landings - /l/:slug/*
-router.get('/l/:slug/*', (request, env, ctx) => {
+router.get('/l/:slug/*', Caching.defaultCache, (request, env, ctx) => {
 	const { slug } = request.params;
 	return Landing.handleLang(defaultLang, slug, request, env, ctx);
 });
 
 // Aggregators - /m/:slug/*
-router.get('/m/:slug/*', (request, env, ctx) => {
+router.get('/m/:slug/*', Caching.defaultCache, (request, env, ctx) => {
 	const { slug } = request.params;
 	return Aggregator.handleAggregatorLang(defaultLang, slug, request, env, ctx);
 });
 
-router.get('/a/', (request, env, ctx) => {
+router.get('/a/', Caching.defaultCache, (request, env, ctx) => {
 	return Author.authorsListLang(defaultLang, request, env, ctx);
 });
 
 // Autores - /a/:slug/*
-router.get('/a/:slug/*', (request, env, ctx) => {
+router.get('/a/:slug/*', Caching.defaultCache, (request, env, ctx) => {
 	const { slug } = request.params;
 
 	const url = new URL(request.url);
@@ -134,7 +134,7 @@ router.get('/a/:slug/*', (request, env, ctx) => {
 });
 
 // Páginas Estáticas - /s/:slug/*
-router.get('/s/:slug/*', (request, env, ctx) => {
+router.get('/s/:slug/*', Caching.defaultCache, (request, env, ctx) => {
 	const { slug } = request.params;
 	return Page.handleLang(defaultLang, slug, request, env, ctx);
 });
@@ -147,7 +147,7 @@ supportedLangs.forEach((lang) => {
 	});
 
 	// Categorias - /:lang/c/:slug/*
-	router.get(`/${lang}/c/:slug/*`, (request, env, ctx) => {
+	router.get(`/${lang}/c/:slug/*`, Caching.defaultCache, (request, env, ctx) => {
 		const { slug } = request.params;
 
 		const url = new URL(request.url);
@@ -167,23 +167,23 @@ supportedLangs.forEach((lang) => {
 	});
 
 	// Landings - /:lang/l/:slug/*
-	router.get(`/${lang}/l/:slug/*`, (request, env, ctx) => {
+	router.get(`/${lang}/l/:slug/*`, Caching.defaultCache, (request, env, ctx) => {
 		const { slug } = request.params;
 		return Landing.handleLang(lang, slug, request, env, ctx);
 	});
 
 	// Aggregators - /m/:slug/*
-	router.get(`/${lang}/m/:slug/*`, (request, env, ctx) => {
+	router.get(`/${lang}/m/:slug/*`, Caching.defaultCache, (request, env, ctx) => {
 		const { slug } = request.params;
 		return Aggregator.handleAggregatorLang(lang, slug, request, env, ctx);
 	});
 
-	router.get(`/${lang}/a/`, (request, env, ctx) => {
+	router.get(`/${lang}/a/`, Caching.defaultCache, (request, env, ctx) => {
 		return Author.authorsListLang(lang, request, env, ctx);
 	});
 
 	// Autores - /:lang/a/:slug/*
-	router.get(`/${lang}/a/:slug/*`, (request, env, ctx) => {
+	router.get(`/${lang}/a/:slug/*`, Caching.defaultCache, (request, env, ctx) => {
 		const { slug } = request.params;
 
 		const url = new URL(request.url);
@@ -197,7 +197,7 @@ supportedLangs.forEach((lang) => {
 	});
 
 	// Páginas Estáticas - /:lang/s/:slug/*
-	router.get(`/${lang}/s/:slug/*`, (request, env, ctx) => {
+	router.get(`/${lang}/s/:slug/*`, Caching.defaultCache, (request, env, ctx) => {
 		const { slug } = request.params;
 		return Page.handleLang(lang, slug, request, env, ctx);
 	});

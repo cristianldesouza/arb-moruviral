@@ -4,6 +4,7 @@ import NotFound from './NotFound';
 import Requests from '../models/Requests';
 import constants from '../constants';
 import Util from '../models/Util';
+import criticalCss from '../critical_home_css.txt';
 
 function topPostsRender(mainPost, otherPosts) {
 	let items = '';
@@ -115,6 +116,8 @@ class Home {
 						? `https://${constants.DOMAIN}/`
 						: `https://${constants.DOMAIN}/${lang}/`,
 			});
+
+			header = header.split('<!-- custom headers -->').join(criticalCss);
 
 			let top_posts = topPostsRender(homeData.posts[0], homeData.posts.slice(1));
 

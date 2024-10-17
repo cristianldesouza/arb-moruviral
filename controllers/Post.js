@@ -33,8 +33,6 @@ class Post {
 
 			let seoImage = post.seo_image || post.image || false;
 
-			console.log(seoImage);
-
 			let header = Template.renderTemplate('header', {
 				lang,
 				menu: constants.MENU[lang],
@@ -72,6 +70,11 @@ ${criticalCss}`);
 			);
 
 			let content = Template.renderTemplate('post_index', post);
+
+			for (let relatedPost of postData.related_posts) {
+				relatedPost.category_name = post.category_name;
+				relatedPost.category_slug = post.category_slug;
+			}
 
 			let replacesMap = {
 				'{{pro_points_language}}': constants.PRO_POINTS_LANGUAGE[lang],
