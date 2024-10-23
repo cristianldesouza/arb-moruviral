@@ -1,6 +1,62 @@
 <!DOCTYPE html>
 <html lang="{{lang}}" data-theme="light">
     <head>
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script src="https://js.publinker.com/wrapper.v2.moruviral.com.js"></script>
+        <script>
+            (function() {
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Function to check if the user is on a desktop device based on window width
+                    function isDesktop() {
+                        return window.innerWidth >= 1024; // Adjust this value based on your breakpoint
+                    }
+
+                    // Function to update ad divs to desktop versions
+                    function updateAdDivsForDesktop() {
+                        var adDivs = document.querySelectorAll('.publinker-ad');
+
+                        // Desktop ad configurations in sequence
+                        var desktopAds = [
+                            {
+                                publinkerCode: 'moruviral_desktop_top_{source}',
+                                publinkerSizes: '[[300,250],[336,380],[728,90]]',
+                            },
+                            {
+                                publinkerCode: 'moruviral_desktop_mid1_{source}',
+                                publinkerSizes: '[[300,250],[336,380]]',
+                            },
+                            {
+                                publinkerCode: 'moruviral_desktop_mid2_{source}',
+                                publinkerSizes: '[[300,250],[336,380]]',
+                            },
+                        ];
+
+                        // Update each ad div with the desktop configuration
+                        adDivs.forEach(function (adDiv, index) {
+                            if (desktopAds[index]) {
+                                adDiv.setAttribute('publinker-code', desktopAds[index].publinkerCode);
+                                adDiv.setAttribute('publinker-sizes', desktopAds[index].publinkerSizes);
+                            }
+                        });
+                    }
+
+                    // Initial check when the page loads
+                    if (isDesktop()) {
+                        updateAdDivsForDesktop();
+                    }
+
+                    // Optional: Update ads on window resize
+                    window.addEventListener('resize', function () {
+                        if (isDesktop()) {
+                            updateAdDivsForDesktop();
+                        } else {
+                            // Optionally, you can reset to mobile ads if needed
+                            // For example, you could implement a function updateAdDivsForMobile()
+                        }
+                    });
+                });
+            })();
+        </script>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
         <link rel="preconnect" href="https://cdn.moruviral.com" crossorigin>

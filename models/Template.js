@@ -7,6 +7,7 @@ import footer from '../templates/footer.html';
 import preloader from '../templates/ads/preloader.html';
 import ad_top from '../templates/ads/top.html';
 import ad_mid from '../templates/ads/mid.html';
+import ad_mid_2 from '../templates/ads/mid2.html';
 import not_found from '../templates/404.html';
 import contact_index from '../templates/contact/index.html';
 import cta from '../templates/elements/cta.html';
@@ -59,6 +60,7 @@ const templates = Object.freeze({
 	footer,
 	ad_top,
 	ad_mid,
+	ad_mid_2,
 	preloader,
 	cta,
 	not_found,
@@ -113,17 +115,48 @@ class Template {
 	}
 
 	insertAdsToPage(html) {
-		let ads = {
-			'<p>{ad_top}</p>': templates.ad_top,
-			'<p>{ad_mid}</p>': templates.ad_mid,
-			'[ad]': templates.ad_mid,
-			'<p>{ad}</p>': templates.ad_mid,
-			'<p style="margin-left:0px;">{ad}</p>': templates.ad_mid,
+		// Define the placeholders and their corresponding templates
+		const adPlaceholders = [
+			'<p>{ad_top}</p>', // Only one template for ad_top
+			'<p>{ad_mid}</p>',
+			'[ad]',
+			'<p>{ad}</p>',
+			'<p style="margin-left:0px;">{ad}</p>',
+		];
+
+		// Map each placeholder to its templates
+		const placeholderToTemplates = {
+			'<p>{ad_top}</p>': [templates.ad_top],
+			'<p>{ad_mid}</p>': [templates.ad_mid, templates.ad_mid_2],
+			'[ad]': [templates.ad_mid, templates.ad_mid_2],
+			'<p>{ad}</p>': [templates.ad_mid, templates.ad_mid_2],
+			'<p style="margin-left:0px;">{ad}</p>': [templates.ad_mid, templates.ad_mid_2],
 		};
 
-		for (let ad in ads) {
-			html = html.split(ad).join(ads[ad]);
-		}
+		// Escape special regex characters in placeholders
+		const placeholdersEscaped = adPlaceholders.map((ph) =>
+			ph.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+		);
+		// Create a regex pattern to match any of the placeholders
+		const regexPattern = placeholdersEscaped.join('|');
+		const regex = new RegExp(regexPattern, 'g');
+
+		// Keep track of how many times each placeholder has been replaced
+		const placeholderCounts = {};
+
+		// Replace placeholders in the HTML content
+		html = html.replace(regex, function (match) {
+			// Initialize the count for this placeholder if not already done
+			if (!placeholderCounts[match]) {
+				placeholderCounts[match] = 0;
+			}
+			const templatesArray = placeholderToTemplates[match];
+			const count = placeholderCounts[match];
+			// Use the appropriate template based on the count (0 for first occurrence, 1 for second)
+			const replacement = templatesArray[Math.min(count, templatesArray.length - 1)];
+			placeholderCounts[match]++;
+			return replacement;
+		});
 
 		return html;
 	}

@@ -14,7 +14,7 @@ const links = document.getElementsByTagName('a');
 const medium = url.searchParams.get('utm_medium');
 const campaign = url.searchParams.get('utm_campaign');
 const source = url.searchParams.get('utm_source');
-const country = url.searchParams.get('utm_term');
+const term = url.searchParams.get('utm_term');
 
 let attrs = {};
 
@@ -24,7 +24,7 @@ if (campaign) attrs.campaign = campaign;
 
 if (medium) attrs.medium = medium;
 
-if (country) attrs.country = country;
+if (term) attrs.country = term;
 
 for (let link of links) {
 	for (let attr in attrs) {
